@@ -1,0 +1,81 @@
+@charset 'utf=8';
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: '微软雅黑', 'Microsoft YaHei';
+}
+body {
+	background: #fff2e3;
+}
+.head,.main,.foot {
+	text-align: center;
+}
+.head>h1 {
+	color: #87968e;
+	font-size: 42px;
+}
+.head>p {
+	color: #87968e;
+	margin-top: 10px;
+}
+.main1>input,.main3>input {
+	background: #72b890;
+	color: #fff;
+	width: 75px;
+	height: 35px;
+	border-radius: 5px;
+	line-height: 35px;
+	margin-left: 10px;
+	margin-top: 10px;
+
+}
+.main2 {
+	width: 450px;
+	height: 370px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 15px; 
+	background: rgba(50,200,30,0.3);
+	text-align: left;
+	border: 2px solid orange;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.container {
+	width: 2700px;
+	position: relative;
+	animation: swming 10s linear infinite normal;
+}
+@keyframes swming {
+	0%{left: 0px}
+	7%{left: 0px}
+
+	12%{left: -450px}
+	27%{left: -450px}
+
+	32%{left: -900px}
+	47%{left: -900px}
+
+	52%{left: -1350px}
+	67%{left: -1350px}
+
+	72%{left: -1800px}
+	87%{left: -1800px}
+
+	92%{left: -2250px}
+	100%{left: -2250px}
+	}
+.container>img {
+	width: 450px;
+	height: 370px;
+	float: left;
+}
+.foot {
+	margin-top: 30px;
+	color: #87968e;
+}
+.foot>a {
+	text-decoration: none;
+	color: #72b890;
+}
