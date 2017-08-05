@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>fixedFooter</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html,body {
+			height: 100%;
+			color: rgb(200,200,10);
+		}
+		header,footer {
+			height: 100px;
+			text-align: center;
+			background: rgba(3p,30,30,0.3);
+			background: linear-gradient(to right, rgb(30,40,50), rgb(30,140,50), rgb(30,40,150))
+		}
+		.main {
+			min-height: calc(100% - 200px);
+			text-align: center;
+			background: rgba(30,200,30,0.3);
+			background: radial-gradient(rgb(30,40,150),rgb(30,40,50), rgb(30,140,50) );
+			padding: 1px;
+			box-sizing: border-box;
+		}
+		header>h1 {
+			line-height: 100px;
+		}
+		.main>li {
+			list-style: none;
+			margin-top: 20px;
+		}
+		footer>input {
+			height: 50px;
+			padding: 10px;
+			margin: 30px;
+			font-size: 20px;
+			background: orange;
+			border-radius: 10px;
+		}
+		header>
+	</style>
+</head>
+<body>
+	<header>
+		<h1>示例：尾部固定</h1>
+	</header>
+	<main class="main" id="main">
+		<li>
+			<p>示例图片1</p>
+			<img src="http://7xpvnv.com2.z0.glb.qiniucdn.com/65d4aba2-a097-4b24-aaa0-ebbaf7eedab2" alt="示例图片" title="示例图片" id="img1">
+		</li>
+	</main>
+	<footer>
+		<input type="button" id="input1" value="点我复制图片" onclick="add()">
+		<input type="button" id="input1" value="点我删除图片" onclick="del()">
+	</footer>
+	<script>
+		var main=document.getElementById('main');
+		var img1=document.getElementById('img1');
+		var src1=img1.src;
+
+		var i=1;
+		function add(){
+				if(i<=0){i=0};
+				i++;
+			var ps=document.createElement('p');
+				ps.innerHTML='示例图片'+i;
+			var imgs=document.createElement('img');
+				imgs.src=src1;
+			var lis=document.createElement('li');
+				lis.appendChild(ps);
+				lis.appendChild(imgs);
+				main.appendChild(lis);
+		}
+		
+		function del(){
+			var last1=main.lastElementChild;
+			var last2=main.lastChild;
+			if(last1){
+				main.removeChild(last1);
+			}
+			else{
+				main.removeChild(last2);
+			}
+			i--;
+		}	
+	</script>
+</body>
+</html>
