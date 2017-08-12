@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>l05</title>
+</head>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		header>h1 {
+			line-height: 75px;
+			text-align: center;
+		}
+		body {
+				min-width: 600px;
+		}
+		aside {
+			width: 200px;
+			float: right;
+			height: calc(100vh - 150px);
+			text-align: center;
+		}
+		article {
+			margin-right: 200px;
+			height: calc(100vh - 150px);
+			background: green;
+			position: relative;
+		}
+		aside>input {
+			width: 100%;
+			height: 25%;
+			border: 10px groove orange;
+			font-size: 20px;	
+		}
+		article>p {
+			display: block;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		#p1 {
+			background: red;
+		}
+		#p2 {
+			background: blue;
+		}
+		#p3 {
+			background: orange;
+		}
+		#p4 {
+			background: yellow;
+		}
+		footer>p {
+			line-height: 75px;
+			text-align: center;
+		}
+	</style>
+<body>
+	<header>
+		<h1>点击侧边栏切换</h1>
+	</header>
+	<aside>
+		<input type="button" value="《西游记》" id="ipt1">
+		<input type="button" value="《三国演义》" id="ipt2">
+		<input type="button" value="《水浒传》" id="ipt3">
+		<input type="button" value="《红楼梦》" id="ipt4">
+	</aside>
+	<article>
+		<p id="p1">西游记西游记西游记西游记</p>
+		<p id="p2">三国演义三国演义三国演义</p>
+		<p id="p3">水浒传水浒传水浒传水浒传</p>
+		<p id="p4">红楼梦红楼梦红楼梦红楼梦</p>
+	</article>
+	<footer>
+		<p>作者：Jirengu-H.yang</p>
+	</footer>
+	<script>
+		var ipt1=document.getElementById('ipt1');
+		var ipt2=document.getElementById('ipt2');
+		var ipt3=document.getElementById('ipt3');
+		var ipt4=document.getElementById('ipt4');
+
+		var p1=document.getElementById('p1');
+		var p2=document.getElementById('p2');
+		var p3=document.getElementById('p3');
+		var p4=document.getElementById('p4');
+
+		var i=1;
+
+		ipt1.onclick=function(){p1.style.zIndex=i;i++}
+		ipt2.onclick=function(){p2.style.zIndex=i;i++}
+		ipt3.onclick=function(){p3.style.zIndex=i;i++}
+		ipt4.onclick=function(){p4.style.zIndex=i;i++}
+		
+	</script>
+</body>
+</html>
