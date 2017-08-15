@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jirengu</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		header {
+			width: 100%;
+			height: 830px;
+			background: url(img/01.jpg) no-repeat;
+			background-size: cover;
+		}
+		.container {
+			width: 100%;
+			height: 100%;
+			background: rgba(30,30,30,0.6);
+		}
+		.container>nav {
+			height: 50px;
+		}
+		#station {
+			color: #fed136;
+			line-height: 50px;
+			font-size: 2em;
+			margin:  0 100px 0 15px;
+			text-decoration: none;
+		}
+		#nav>a {
+			line-height: 50px;
+			text-decoration: none;
+			color: #fff;
+			margin-right: 15px;
+		}
+		#nav>a:hover {
+			 color: #fed136;
+		}
+		#nav {
+			float: right;
+		}
+		.intro-text {
+			width: 100%;
+		}
+		.intro-text>#p1 {
+			font-size: 40px;
+			width: 60%;
+			margin: 200px auto 0;
+			text-align: center;
+			color: #fff;
+		}
+		.intro-text>#p2 {
+			font-size: 75px;
+			font-weight: bold;
+			width: 60%;
+			margin: 0 auto;
+			text-align: center;
+			color: #fff;
+		}
+		#p2>span {
+			background: #fed136;
+		}
+		/******************************/
+		
+		main .title {
+			font-size: 40px;
+			font-weight: bold;
+			text-align: center;
+			color: #fed136;
+			margin-top: 150px;
+		}
+		main .titles {
+			text-align: center;
+			font-style: italic;
+			color: #777;
+			margin-bottom: 50px; 
+		}
+		.infor {
+			margin: 0 auto;
+			margin-bottom: 150px;
+			width: 800px;
+			display: flex;
+		}
+		#body,#event,#prize {
+			text-align: center;
+			flex: 1;
+		}
+		.cir {
+			width: 100px;
+			height: 100px;
+			border-radius: 50%;
+			background:#fed136;
+			font-family: 'iconfont'!important;
+			font-size: 50px;
+			text-align: center;
+			line-height: 100px;
+			margin: 0 auto;
+			color: #fff;
+		}
+		.intro {
+			margin: 10px auto;
+		}
+			/******************************/
+		.con-photos {
+			width: 100%;
+			background: rgba(20,20,20,0.1);
+			padding-top: 1px;
+			padding-bottom: 70px;
+		}
+		.photos {
+			width: 800px;
+			margin: 0 auto;	
+		}
+		.photos>.container2 {
+			
+			margin-left: -25px;
+		}
+		.photos>.container2::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.photo {
+			text-align: center;
+			padding-left: 25px;
+			margin-bottom: 80px;
+			float: left;
+		}
+		.photo>a {
+			display: inline-block;
+			width: 250px;
+			height: 150px;
+			background: url(img/02.jpg) no-repeat;
+			background-size: cover;
+			text-decoration: none;
+		}
+		.photo>a>div {
+			width: 100%;
+			height: 100%;
+			line-height: 150px;
+			text-align: center;
+			font-size: 0px;
+			font-family: 'iconfont'!important;
+			color: #fff;
+			font-weight: bold;
+		}
+		.photo>a>div:hover {
+			background: rgba(255,255,0,0.7);
+			font-size: 50px;
+		}
+		/******************************/
+		.about {
+			width: 800px;
+			margin: 0 auto;
+			margin-bottom: 100px;
+			position: relative;
+		}
+		.about>p {
+			width: 300px;
+			height: 150px;
+			text-align: right;
+		}
+		.about::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.about2>p {
+			float: right;
+			text-align: left;
+		}
+		
+		.about>.ab-cir {
+			width: 130px;
+			height: 130px;
+			border-radius: 50%;
+			box-sizing: border-box;
+			border: 5px solid #aaa;
+			position: absolute;
+			top: 0;
+			left: 335px;
+		}
+		.about3 {
+		 	padding-bottom: 150px;
+		}
+		.about3::after {
+			content: '';
+			display: block;
+			width: 5px;
+			background: #eee;
+			height: 1120px;
+			position: absolute;
+			bottom: 20px;
+			left: 400px;
+			z-index: -1;
+		}
+		.ab1 {
+			background: url(img/04.jpg) no-repeat;
+			background-size: cover;
+		}
+		.ab2 {
+			background: url(img/05.jpg) no-repeat;
+			background-size: cover;
+		}
+		.ab3 {
+			background: url(img/06.jpg) no-repeat;
+			background-size: cover;
+		}
+		.ab4 {
+			background: url(img/07.jpg) no-repeat;
+			background-size: cover;
+		}
+		.ab5 {
+			background: url(img/08.jpg) no-repeat;
+			background-size: cover;
+		}
+		/******************************/
+		.games {
+			width: 800px;
+			display: flex;
+			margin: 0 auto;
+		}
+		.game {
+			flex: 1;
+			text-align: center;
+		}
+		.game>.ga-cir {
+			width: 170px;
+			height: 170px;
+			box-sizing: border-box;
+			border-radius: 50%;
+			border: 5px solid #eee;
+			margin: 0 auto;
+		}
+		.ga1 {
+			background-image: url(img/09.jpg);
+			background-size: cover;
+		}
+		.ga2 {
+			background-image: url(img/10.jpg);
+			background-size: cover;
+		}
+		.ga3 {
+			background-image: url(img/11.jpg);
+			background-size: cover;
+		}
+		.con-games {
+			padding-top: 1px;
+			padding-bottom: 150px;
+			background: rgba(20,20,20,0.1);
+		}
+		.describe {
+			width: 800px;
+			margin: 0 auto;
+			margin-top: 40px;
+			text-align: center;
+			color: #777;
+		}
+		/******************************/
+		.advers {
+			width: 100%;
+			display: flex;
+		}
+		.adver {
+			flex: 1;
+			font-size: 30px;
+			line-height: 50px;
+			height: 50px;
+			margin: 30px auto;
+			text-align: center;
+		}
+		/******************************/
+		.con-contact {
+			background: url(img/03.jpg) no-repeat;
+			background-size: cover;
+		}
+		.contact {
+			padding: 150px 0;
+			width: 100%;
+			background: rgba(30,30,30,0.8);
+		}
+		.contact>.con {
+			width: 100%;
+			text-align: center;
+		}
+		.con>h3 {
+			font-size: 40px;
+			color: #fff;
+			margin-bottom: 10px;
+		}
+		.con>p {
+			color: #ccc;
+		}
+		.con-infor {
+			width: 400px;
+			display: inline-block;
+		}
+		.contact>form {
+			text-align: center;
+			margin-top: 50px;
+
+		}
+		.con-infor>input {
+			width: 400px;
+			height: 50px;
+			margin-bottom: 20px;
+			border-radius: 8px;
+			outline: none;
+			font-size: 16px;
+
+		}
+		.con-area {
+			display: inline-block;
+			vertical-align: top;
+		}
+		.con-area>textarea {
+			width: 400px;
+			height: 200px;
+			margin-left: 30px;
+			font-size: 16px;
+		}
+		.con-send>input {
+			font-size: 20px;
+			background: #fed136;
+			color: #fff;
+			padding: 10px 20px;
+			outline: none;
+			border-radius: 6px;
+		}
+		/******************************/
+		footer {
+			width: 100%;
+			text-align: center;
+			padding: 30px 0;
+			font-size: 20px;
+		}
+		footer>a {
+			text-decoration: none;
+			color: #fed136;
+		}
+		footer>div {	
+			position: fixed;
+			right: 50px;
+			bottom: 50px;	
+		}
+		footer>div>a {
+			font-family:  'iconfont'!important;
+			font-size: 80px;
+			text-decoration: none;
+			color: #fed136;
+		}
+@font-face {
+  font-family: 'iconfont';  /* project id 385184 */
+  src: url('//at.alicdn.com/t/font_385184_hmzeyjtiiyq4cxr.eot');
+  src: url('//at.alicdn.com/t/font_385184_hmzeyjtiiyq4cxr.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_385184_hmzeyjtiiyq4cxr.woff') format('woff'),
+  url('//at.alicdn.com/t/font_385184_hmzeyjtiiyq4cxr.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_385184_hmzeyjtiiyq4cxr.svg#iconfont') format('svg');
+}
+/******************************/
+	</style>
+</head>
+<body>
+	<header>
+		<div class="container">
+			<nav>
+				<a id="station" href="">Lebron Station</a>
+				<div id="nav">
+					<a href="#information">INFORMATION</a>
+					<a href="#photos">PHOTOS</a>
+					<a href="#abouts">ABOUT</a>
+					<a href="#games">GAMES</a>
+					<a href="#contact">CONTACT</a>
+				</div>
+				
+			</nav>
+			<div class="intro-text">
+				<p id="p1">Welcome To Our Station!</p>
+				<p id="p2"><span>IT'S NICE TO MEET YOU</span></p>
+				<a href="TELL ME MORE"></a>
+			</div>
+		</div>
+	</header>
+	<main>
+		<div class="intro-infor" id="information">
+			<p class="title">INFORMATION</p>
+			<p class="titles">informationinformation</p>
+		</div>
+		<div class="infor">
+			<div id="body">
+				<div class="cir">
+					&#xe90a;
+				</div>
+				<h3 class="intro">BODY</h3>
+				<p>information information information information</p>
+			</div>
+			<div id="event">
+				<div class="cir">
+					&#xe609;
+				</div>
+				<h3 class="intro">EVENT</h3>
+				<p>information information information information</p>
+			</div>
+			<div id="prize">
+				<div class="cir">
+					&#xe660;
+				</div>
+				<h3 class="intro">PRIZE</h3>
+				<p>information information information information</p>
+			</div>
+		</div>
+
+		<div class="con-photos" id="photos">
+			<div class="intro-photos">
+				<p class="title">PHOTOS</p>
+				<p class="titles">photophoto</p>
+			</div>
+			<div class="photos">
+				<div class="container2">
+					<div class="photo">
+						<a href=""><div>1</div></a>
+						<h3 class="intro">photophoto1</h3>
+						<p>photophoto</p>
+					</div>
+					<div class="photo">
+						<a href=""><div>&#xe61f;</div></a>
+						<h3 class="intro">photophoto2</h3>
+						<p>photophoto</p>
+					</div>
+					<div class="photo">
+						<a href=""><div>&#xe61f;</div></a>
+						<h3 class="intro">photophoto3</h3>
+						<p>photophoto</p>
+					</div>
+					<div class="photo">
+						<a href=""><div>&#xe61f;</div></a>
+						<h3 class="intro">photophoto4</h3>
+						<p>photophoto</p>
+					</div>
+					<div class="photo">
+						<a href=""><div>&#xe61f;</div></a>
+						<h3 class="intro">photophoto5</h3>
+						<p>photophoto</p>
+					</div>
+					<div class="photo">
+						<a href=""><div>&#xe61f;</div></a>
+						<h3 class="intro">photophoto6</h3>
+						<p>photophoto</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="intro-abouts" id="abouts">
+			<p class="title">ABOUT</p>
+			<p class="titles">aboutaboutabout</p>
+		</div>
+		<div class="abouts">
+			<div class="about">
+				<p>
+					勒布朗·詹姆斯在2003年NBA选秀中于首轮第1顺位被克利夫兰骑士队选中；勒布朗·詹姆斯在2003年NBA选秀中于首轮第1顺位被克利夫兰骑士队选中
+				</p>
+				<div class="ab-cir ab1"></div>
+			</div>
+			<div class="about about2">
+				<p>
+					2003-2010年，詹姆斯效力于骑士队，期间2次当选NBA最有价值球员（MVP）；2003-2010年，詹姆斯效力于骑士队，期间2次当选NBA最有价值球员（MVP）
+				</p>
+				<div class="ab-cir ab2"></div>
+			</div>
+			<div class="about">
+				<p>
+					2010-2014年，詹姆斯转会至迈阿密热火队，与德怀恩·韦德以及克里斯·波什组成“三巨头”阵容；2010-2014年，詹姆斯转会至迈阿密热火队，与德怀恩·韦德以及克里斯·波什组成“三巨头”阵容
+				</p>
+				<div class="ab-cir ab3"></div>
+			</div>
+			<div class="about about2">
+				<p>
+					2014年——，詹姆斯回归骑士，与凯里·欧文、凯文·乐福组成“三巨头”阵容；2014年——，詹姆斯回归骑士，与凯里·欧文、凯文·乐福组成“三巨头”阵容
+				</p>
+				<div class="ab-cir ab4"></div>
+			</div>
+			<div class="about about3">
+				<div class="ab-cir ab5"></div>
+			</div>
+		</div>
+		<div class="con-games" id="games">
+			<div class="intro-games">
+				<p class="title">Games</p>
+				<p class="titles">gamesgamesgamesgames</p>
+			</div>
+			<div class="games">
+				<div class="game">
+					<div class="ga-cir ga1"></div>
+					<h3 class="intro">game1</h3>
+					<p>game1 game1 game1</p>
+				</div>
+				<div class="game">
+					<div class="ga-cir ga2"></div>
+					<h3 class="intro">game1</h3>
+					<p>game1 game1 game1</p>
+				</div>
+				<div class="game">
+					<div class="ga-cir ga3"></div>
+					<h3 class="intro">game1</h3>
+					<p>game1 game1 game1</p>
+				</div>
+			</div>
+			<p class="describe">
+				games games games games games games games games games  
+			</p>
+		</div>
+		<div class="advers">
+			<div class="adver">ADVER1</div>
+			<div class="adver">ADVER2</div>
+			<div class="adver">ADVER3</div>
+			<div class="adver">ADVER4</div>
+		</div>
+	<div class="con-contact">
+			<div class="contact" id="contact">
+				<div class="con">
+					<h3 class="con-tit">CONTACT US</h3>
+					<p class="con-des">Lorem ipsum dolor sit amet consectetur.</p>
+				</div>
+				<form action="#" method="GET">
+					<div class=con-infor>
+						<input type="text" placeholder="YOUR NAME*" name="user">
+						<input type="email" placeholder="YOUR EMAIL*" name="email">
+						<input type="text" placeholder="YOUR PHONE*" name="tel">
+					</div>
+					<div class="con-area">
+						<textarea name="message" placeholder="YOUR MESSAGE*"></textarea>
+					</div>
+					<div class="con-send">
+						<input type="submit" value="SEND MESSAGE">
+					</div>
+				</form>
+			</div>
+		</div>
+	</main>
+	<footer>
+		BY.<a href="#">Jirengu-H.yang</a>
+		<div><a href="#">&#xe603;</a></div>
+	</footer>
+</body>
+</html>
