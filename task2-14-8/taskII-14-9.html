@@ -137,6 +137,8 @@
 				return $(".nav li").eq(j).click(function () {
 					$(this).addClass("nav-click").siblings().removeClass("nav-click")
 					$(".inner-list>img").attr("src",products[j].img)
+					$(".inner-list>p").text(products[j].name)
+					$(".inner-list>span").text(products[j].price)
 				})
 			})(i)	
 		}
