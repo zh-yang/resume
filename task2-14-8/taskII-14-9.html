@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab 切换</title>
+	<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="common.css">
+	<style>
+	  body {
+	  	color: #444;
+	  	margin: 20px 20px;
+	  }
+	  .nav {
+	  	display: inline-block;
+	  	vertical-align: middle;
+	  	border: 1px solid #ccc;
+	  	border-bottom: none;
+	  	border-radius: 5px 5px 0 0;
+	  }
+		.nav li {
+			float: left;
+			border-left: 1px solid #ccc;
+			padding: 5px 5px;
+			cursor: pointer;
+		}
+		.nav li:first-child {
+			border-left: none;
+			border-radius: 5px 0 0 0;
+		}
+		.nav li:last-child {
+			border-radius: 0 5px 0 0;
+		}
+		.nav-click {
+			background: #ccc;
+			color: red;
+		}
+		.content {
+			width: 634px;
+			border: 2px solid #ccc;
+		}
+		.inner {
+			margin: -15px 0 0-15px;
+		}
+		.inner-list {
+			position: relative;
+			float: left;
+			width: 200px;
+			margin: 15px 0 0 15px;
+			padding: 20px 10px 10px;
+			border: 1px solid #e6e6e6;
+			text-align: center;
+			font-size: 14px;
+			overflow: hidden;
+		}
+		.inner-list>span {
+			color: red;
+		}
+		.buy::after {
+			position: absolute;
+			top: calc(50% - 1px);
+			left: calc(50% - 1px);
+			transform: translate(-50%,-50%);
+			content: "立即抢购";
+			display: block;
+			padding: 5px 10px;
+			border: 1px solid red;
+			border-radius: 5px;
+			font-size: 14px;
+			background: white;
+			box-shadow: 0 0 0 120px rgba(20,20,20,0.4);
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<div class="warp">
+		<div class="nav clearfix">
+			<ul>
+				<li>热门</li>
+				<li>珠宝首饰</li>
+				<li>奢侈品</li>
+			</ul>
+		</div>
+		<div class="content">
+			<div class="inner clearfix">
+				<div class="inner-list">
+					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+					<p>藏美千足金和田玉金镶玉路路通戒指</p>
+					<span>￥1699.00</span>
+				</div>
+				<div class="inner-list">
+					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+					<p>藏美千足金和田玉金镶玉路路通戒指</p>
+					<span>￥1699.00</span>
+				</div>
+				<div class="inner-list">
+					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+					<p>藏美千足金和田玉金镶玉路路通戒指</p>
+					<span>￥1699.00</span>
+				</div>
+				<div class="inner-list">
+					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+					<p>藏美千足金和田玉金镶玉路路通戒指</p>
+					<span>￥1699.00</span>
+				</div>
+				<div class="inner-list">
+					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+					<p>藏美千足金和田玉金镶玉路路通戒指</p>
+					<span>￥1699.00</span>
+				</div>
+				<div class="inner-list">
+					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
+					<p>藏美千足金和田玉金镶玉路路通戒指</p>
+					<span>￥1699.00</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var products = [
+			{
+				img: 'http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg',
+				name: '藏美千足金和田玉金镶玉路路通戒指',
+				price: '￥1699.00'
+			},{
+				img: 'http://img12.360buyimg.com/N3/jfs/t2302/181/1562193880/220016/88a978ef/56cbbc11Nd6d3b04b.jpg',
+				name: '藏美千足金和田玉金镶玉路路通吊坠',
+				price: '￥699.00'
+			},{
+				img: 'http://img13.360buyimg.com/N3/jfs/t2461/336/2166939566/101221/3af27699/56c426a5N9b6673f4.jpg',
+				name: '投资金条（定制版）',
+				price: '￥1800.00'
+			}
+		];
+		for(var i = 0;i < $(".nav li").length;i++){
+			(function (j) {
+				return $(".nav li").eq(j).click(function () {
+					$(this).addClass("nav-click").siblings().removeClass("nav-click")
+					$(".inner-list>img").attr("src",products[j].img)
+				})
+			})(i)	
+		}
+		$(".inner-list").mouseenter(function(){
+			$(this).addClass("buy")
+		})
+		$(".inner-list").mouseleave(function(){
+			$(this).removeClass("buy")
+		})
+	</script>
+</body>
+</html>
