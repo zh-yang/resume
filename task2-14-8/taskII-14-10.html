@@ -139,10 +139,10 @@
 				})
 			})(i)	
 		}
-		$(".inner-list").mouseenter(function(){
+		$(".inner").on("mouseenter",".inner-list",function(){
 			$(this).addClass("buy")
 		})
-		$(".inner-list").mouseleave(function(){
+		$(".inner").on("mouseleave",".inner-list",function(){
 			$(this).removeClass("buy")
 		})
 		$(".add").click(function () {
