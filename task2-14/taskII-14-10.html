@@ -8,27 +8,25 @@
 	<style>
 	  body {
 	  	color: #444;
-	  	margin: 20px 20px;
+	  	margin-left: 20px;
 	  }
 	  .nav {
-	  	display: inline-block;
-	  	vertical-align: middle;
+	  	position: fixed;
+	  	top: 0;
+	  	left: 20px;
+	  	z-index: 1;
+	  	width: 100%;
+	  	height: 50px;
 	  	border: 1px solid #ccc;
-	  	border-bottom: none;
-	  	border-radius: 5px 5px 0 0;
+	  	background: white;
+	  	opacity: 1;
 	  }
 		.nav li {
 			float: left;
-			border-left: 1px solid #ccc;
-			padding: 5px 5px;
+			border-right: 1px solid #ccc;
+			padding: 0 20px;
+			line-height: 50px;
 			cursor: pointer;
-		}
-		.nav li:first-child {
-			border-left: none;
-			border-radius: 5px 0 0 0;
-		}
-		.nav li:last-child {
-			border-radius: 0 5px 0 0;
 		}
 		.nav-click {
 			background: #ccc;
@@ -36,6 +34,7 @@
 		}
 		.content {
 			width: 634px;
+			margin-top: 50px;
 			border: 2px solid #ccc;
 		}
 		.inner {
@@ -71,7 +70,7 @@
 			cursor: pointer;
 		}
 		.add,.remove {
-			margin: 20px 20px 0 0;
+			margin: 20px 0 20px 0;
 			padding: 8px 15px;
 			outline: none;
 			border: 1px solid red;
@@ -133,9 +132,16 @@
 			(function (j) {
 				return $(".nav li").eq(j).click(function () {
 					$(this).addClass("nav-click").siblings().removeClass("nav-click")
-					$(".inner-list>img").attr("src",products[j].img)
-					$(".inner-list>p").text(products[j].name)
-					$(".inner-list>span").text(products[j].price)
+					var theLength = $(".inner-list").length - 4
+					if(theLength===-1){
+						$(".inner-list>img").attr("src",products[j].img)
+						$(".inner-list>p").text(products[j].name)
+						$(".inner-list>span").text(products[j].price)
+						return
+					}
+					$(".inner-list:gt("+theLength+")>img").attr("src",products[j].img)
+					$(".inner-list:gt("+theLength+")>p").text(products[j].name)
+					$(".inner-list:gt("+theLength+")>span").text(products[j].price)
 				})
 			})(i)	
 		}
@@ -146,9 +152,9 @@
 			$(this).removeClass("buy")
 		})
 		$(".add").click(function () {
-			var newNode1 = $(".inner-list")[0].cloneNode(true)
-			var newNode2 = $(".inner-list")[0].cloneNode(true)
-			var newNode3 = $(".inner-list")[0].cloneNode(true)
+			var newNode1 = $(".inner-list:last")[0].cloneNode(true)
+			var newNode2 = $(".inner-list:last")[0].cloneNode(true)
+			var newNode3 = $(".inner-list:last")[0].cloneNode(true)
 			$(".inner").append(newNode1,newNode2,newNode3)
 		})
 		$(".remove").click(function () {
