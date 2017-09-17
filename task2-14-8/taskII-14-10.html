@@ -70,6 +70,16 @@
 			box-shadow: 0 0 0 120px rgba(20,20,20,0.4);
 			cursor: pointer;
 		}
+		.add,.remove {
+			margin: 20px 20px 0 0;
+			padding: 8px 15px;
+			outline: none;
+			border: 1px solid red;
+			border-radius: 5px;
+			color: red;
+			background: none;
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
@@ -98,23 +108,10 @@
 					<p>藏美千足金和田玉金镶玉路路通戒指</p>
 					<span>￥1699.00</span>
 				</div>
-				<div class="inner-list">
-					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
-					<p>藏美千足金和田玉金镶玉路路通戒指</p>
-					<span>￥1699.00</span>
-				</div>
-				<div class="inner-list">
-					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
-					<p>藏美千足金和田玉金镶玉路路通戒指</p>
-					<span>￥1699.00</span>
-				</div>
-				<div class="inner-list">
-					<img src="http://img10.360buyimg.com/N3/jfs/t1360/330/897475737/123557/23624706/55b05e25N13d4ec5e.jpg" alt="">
-					<p>藏美千足金和田玉金镶玉路路通戒指</p>
-					<span>￥1699.00</span>
-				</div>
 			</div>
 		</div>
+		<button class="add">添加</button>
+		<button class="remove">移除</button>
 	</div>
 	<script type="text/javascript">
 		var products = [
@@ -147,6 +144,21 @@
 		})
 		$(".inner-list").mouseleave(function(){
 			$(this).removeClass("buy")
+		})
+		$(".add").click(function () {
+			var newNode1 = $(".inner-list")[0].cloneNode(true)
+			var newNode2 = $(".inner-list")[0].cloneNode(true)
+			var newNode3 = $(".inner-list")[0].cloneNode(true)
+			$(".inner").append(newNode1,newNode2,newNode3)
+		})
+		$(".remove").click(function () {
+			if($(".inner-list").length === 3){
+				alert("不能再删了！请添加……")
+				return
+			}
+			$(".inner-list:last").remove()
+			$(".inner-list:last").remove()
+			$(".inner-list:last").remove()
 		})
 	</script>
 </body>
