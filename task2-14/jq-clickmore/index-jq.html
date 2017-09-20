@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>testAJAX</title>
+	<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			background: #BFEC5FBF;
+		}
+		.ct>p {
+			margin: 10px 10px 0 10px;
+			border: 1px solid #4DDF1F;
+			padding: 1em;
+			font-weight: bold;
+			background: rgba(244,176,10,0.4);
+		}
+		input {
+			margin: 20px auto 20px auto;
+			display: block;
+			padding: 10px 20px;
+			border: 1px solid blue;
+			color: blue;
+			border-radius: 5px;
+		}
+		.ct>p:hover {
+			background: rgba(20,150,20,0.3);
+			color: orange;
+		}
+	</style>
+</head>
+<body>
+	<div class="ct">
+		<p>内容1</p>
+		<p>内容2</p>
+	</div>
+	<input id="btn" type="button" value="加载更多">
+
+	<script type="text/javascript">
+		var index = 1;
+		$('#btn').click(function(){
+			$.get('/getFriends').done(function(result){
+				appendHtml(result)
+			})
+		})
+		function appendHtml (arr) {
+			var ct1 = document.createDocumentFragment()
+			for (var i = 0; i < arr.length; i++) {
+				var p = $('<p></p>').text(arr[i] + ((index-1)*5 + 3 + i))
+				$(ct1).append(p)
+			}
+			$('.ct').append($(ct1))
+			index += 1
+		}
+	</script>
+</body>
+</html>
