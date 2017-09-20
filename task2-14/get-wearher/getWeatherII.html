@@ -413,6 +413,7 @@
 		function setToday (obj,index) {
 			$('.inner').eq(index).find('.now-wea>.tem').text(obj.now.temperature+'°')
 			$('.inner').eq(index).find('.now-wea>p').text(obj.today.suggestion.uv.details)
+			$('.inner').eq(index).find('.now-wea>img').attr('src',codeImg+obj.now.code+'.png')
 			var $list = $('.inner').eq(index).find('.future>.list>li')
 			$list.each(function (ind) {
 				$(this).find('.am').attr('src',codeImg + obj.future[ind].code1 + '.png')
