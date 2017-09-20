@@ -196,7 +196,7 @@
 			top: 0;
 			left: 0;
 			display: none;
-			background: rgba(200,200,20,0.9);
+			background: rgba(100,100,100,0.95);
 			z-index: 1;
 		}
 		#addWea>b {
@@ -529,12 +529,26 @@
 				$parent.remove()
 				$('.circles>span').remove()
 				return
+			}else if($length === 3){
+				if($parent.index()===0){$('.control>#go-right').removeClass('right-active')}else{
+					$('.control>#go-left').removeClass('left-active')
+				}	
+			}else if($length === 2){
+				$('.control>#go-right').removeClass('right-active')
+				$('.control>#go-left').removeClass('left-active')
 			}
 			/*---------------如果只剩下多于一个面板，加动画效果------------------*/
 			if($parent.index() === $length-1){
+				console.log($parent.index())
+				console.log($length)
 				$('.circles>span:first').remove()
 				circlesNum -= 1
-				if($('.circles>span').length===2){$('.control>#go-left').removeClass('left-active')}
+/*				if($('.circles>span').length===1){
+					$('.control>#go-left').removeClass('left-active')
+					$('.control>#go-right').removeClass('right-active')
+				}else if($('.circles>span').length===2){
+
+				}*/
 				$('.content').animate({
 					left : '+=' + (1/$length)*$width + 'px'
 				},function(){
@@ -545,7 +559,10 @@
 					left : '+=' + (1/$length)*$width + 'px'
 				},1,function(){
 					$('.circles>span:last').remove()
-					if($('.circles>span').length===2){$('.control>#go-right').removeClass('right-active')}
+					/*if($('.circles>span').length===1){
+						$('.control>#go-right').removeClass('right-active')
+						$('.control>#go-left').removeClass('left-active')
+					}*/
 				})
 				$('.content').animate({
 					left : '-=' + (1/$length)*$width + 'px'
