@@ -399,7 +399,7 @@
 			setCity(rel2.results[0].name,0)
 
 			$.get('//weixin.jirengu.com/weather/now?cityid='+rel2.results[0].id).done(function(rel3){
-				console.log(rel3.weather[0])
+
 				setToday (rel3.weather[0],0)
 			})
 
@@ -478,9 +478,9 @@
 				if(-1*$left < $width*(($length-1)/$length)-10){
 					$('.circles>span').eq(1+circlesNum).addClass('active').siblings('span').removeClass('active')
 					circlesNum += 1
+					$('.control>#go-right').addClass('right-active')
 					if(circlesNum+1 === $('.circles>span').length){
 						$('.control>#go-left').removeClass('left-active')
-						$('.control>#go-right').addClass('right-active')
 					}
 					$('.content').animate({
 						left : '-=' + (1/$length)*$width + 'px'
@@ -502,9 +502,9 @@
 				if($left < -10){
 					$('.circles>span').eq(-1+circlesNum).addClass('active').siblings('span').removeClass('active')
 					circlesNum -= 1
+					$('.control>#go-left').addClass('left-active')
 					if(circlesNum === 0){
 						$('.control>#go-right').removeClass('right-active')
-						$('.control>#go-left').addClass('left-active')
 					}
 					$('.content').animate({
 						left : '+=' + (1/$length)*$width + 'px'
@@ -563,9 +563,6 @@
 			$('.addWea>span').css('display','none')
 
 		})
-
-
-
 
 
 
