@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cask-layout</title>
+</head>
+<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	body {
+		background: rgba(200,200,20,0.1);
+	}
+	.clearfix::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.wrap {
+		width: 1100px;
+		margin: 0 auto;
+	}
+	.wrap>img {
+		display: block;
+		float: left;
+		padding: 10px;
+		border: 1px dashed #ccc;
+	}
+	#load {
+		height: 25px;
+		text-align: center;
+	}
+</style>
+<body>
+	<div class="wrap clearfix"></div>
+	<div id="load">loading……</div>
+	<script type="text/javascript">
+		function $(sel){
+				return document.querySelector(sel)
+			}
+		function BarrelImages (container,loading,eachHeght,num) {
+			/*----参数:1.容器2.底部loading3.图片高度（可选）4.每次加载数量（可选）----*/
+			this.ct = container
+			this.loading = loading
+			this.eachHeght = eachHeght ? eachHeght : 200
+			this.num = num ? num : 20
+			/*----------获取容器宽度；设置数组容纳每次剩下的图片，下一次加载用上-----------*/
+			this.ctWidth = parseInt(getComputedStyle($('.wrap')).width)
+			this.lastList = []
+		}
+		BarrelImages.prototype = {
+			init : function () { /*---初始化，先加载一次，以后滚动加载---*/
+				var _this = this
+				_this.layout(_this.num)
+				window.onscroll = _this.throttle(function(){
+					if(_this.isVisibale(_this.loading)){
+						_this.layout()
+					}
+				},500)
+			},layout : function () { /*---布局，这里集中引用了其他函数---*/
+				var _this = this
+				var urls = _this.getImage(_this.num,1200,800,800,600)
+				var imagesArr = _this.lastList.concat([])
+				_this.lastList = []
+				var count = 0
+				urls.forEach(function(url){
+					var image = new Image()
+					image.src = url
+					image.onload=function(){
+						count++
+						imagesArr = (_this.handel(image,imagesArr))
+						if(count === urls.length){
+							if(imagesArr.length!==0){
+								_this.lastList = [].concat(imagesArr)
+							}	
+						}
+					}
+				})
+			},handel : function (img,arr) { /*---此函数修整图片尺寸，并把修好的传给create函数---*/
+				var _this = this
+				var rowWidth = 0
+				img.thenWidh = (img.width/img.height)*_this.eachHeght
+				img.thenHeight = _this.eachHeght
+				for(var i=0; i<arr.length; i++){
+					rowWidth += arr[i].thenWidh
+				}
+				if((img.thenWidh+rowWidth)<_this.ctWidth){
+					return arr.concat(img)
+				}else{
+					_this.createImage(arr,rowWidth)
+					return [].concat(img)
+				}
+			},createImage : function (arr,totalW) { /*---把修好的图片整体拉伸后放到页面上---*/
+				var _this = this
+				arr.forEach(function(img){
+					var imgNode = document.createElement('img')
+					imgNode.setAttribute('src',img.src)
+					imgNode.style.width = (_this.ctWidth/totalW)*img.thenWidh + 'px'
+					imgNode.style.height = (_this.ctWidth/totalW)*_this.eachHeght + 'px'
+					_this.ct.appendChild(imgNode)
+				})
+			},getImage : function (num,maxW,minW,maxH,minH) { /*---获取随机宽高图片---*/
+				var height,width,urls=[]
+				for(var i = 0;i < num;i++){
+					height = Math.floor(Math.random()*(maxH - minH) + minH)
+					width = Math.floor(Math.random()*(maxW - minW) + minW)
+					urls.push('https://unsplash.it/'+width+'/'+height+'/?random/')
+				}
+				return urls
+			},isVisibale : function (ele) { /*---判断是否到底部---*/
+				var scrollH = document.body.scrollTop,
+				winH = window.innerHeight,
+				top = ele.offsetTop
+				if(top < winH + scrollH){
+					return true
+				}else{
+					return false
+				}
+			},throttle : function (fn,delay) { /*---制造节流函数---*/
+				var timer = null
+				return (function(){
+					if (timer) {
+						clearTimeout(timer)
+					}
+					timer = setTimeout(fn,delay)
+				})
+			}
+		}
+		var barrel = new BarrelImages($('.wrap'),$('#load'))
+		barrel.init()
+	</script>
+</body>
+</html>

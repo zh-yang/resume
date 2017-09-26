@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>cask-layout</title>
+</head>
+<style type="text/css">
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	body {
+		background: rgba(200,200,20,0.1);
+	}
+	.clearfix::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.wrap {
+		width: 1100px;
+		margin: 0 auto;
+	}
+	.wrap>img {
+		display: block;
+		float: left;
+		padding: 10px;
+		border: 1px dashed #ccc;
+	}
+	#load {
+		height: 25px;
+		text-align: center;
+	}
+</style>
+<body>
+	<div class="wrap clearfix"></div>
+	<div id="load">loading……</div>
+	<script type="text/javascript">
+		function $(sel){
+			return document.querySelector(sel)
+		}
+		var lastList = []
+		appendImage(20)
+		window.onscroll = throttle(function(){
+			if(isVisibale($('#load'))){
+				console.log('isVisibale')
+				appendImage(10)
+			}
+		},500)
+		
+		function appendImage(num){
+			var urls = getImage(num)
+			var wrapWidth = parseInt(getComputedStyle($('.wrap')).width)
+			var images = lastList.concat([])
+			lastList = []
+			var imageH = 200
+			var count = 0
+			urls.forEach(function(item){
+				var image = new Image()
+				image.src = item
+				image.onload=function(){
+					count++
+					var that = this
+					that.thenW = (that.width/that.height)*imageH
+					that.thenH = imageH
+					var rowWidth = 0
+					images.forEach(function(img){
+						rowWidth += img.thenW
+					})
+					if((that.thenW+rowWidth)<wrapWidth){
+						images.push(image)
+					}else{
+						createImage(images,rowWidth,wrapWidth,imageH)
+						images.length = 0
+						images.push(that)
+					}
+					if(count === urls.length){
+						if(images.length!==0){
+							lastList = lastList.concat(images)
+						}	
+					}
+				}
+				
+			})
+			
+		}
+
+		function createImage(arr,totalW,ctW,imageH){
+			arr.forEach(function(img){
+				var imgNode = document.createElement('img')
+				imgNode.setAttribute('src',img.src)
+				imgNode.style.width = (ctW/totalW)*img.thenW + 'px'
+				imgNode.style.height = (ctW/totalW)*imageH + 'px'
+				$('.wrap').appendChild(imgNode)
+			})
+		}
+
+		function getImage(num) {
+			var height,width,urls=[]
+			for(var i = 0;i < num;i++){
+				//color = Math.random().toString(16).substring(2,8)
+				height = Math.floor(Math.random()*100+600)
+				width = Math.floor(Math.random()*300+700)
+				urls.push('https://unsplash.it/'+width+'/'+height+'/?random/')
+			}
+			return urls
+		}
+
+		function isVisibale($ele){
+			var scrollH = document.body.scrollTop,
+					winH = window.innerHeight,
+					top = $ele.offsetTop
+					if(top < winH + scrollH){
+						return true
+					}else{
+						return false
+					}
+		}
+		function throttle(fn,delay){
+			var timer = null
+			return (function(){
+				if (timer) {
+					clearTimeout(timer)
+				}
+				timer = setTimeout(fn,delay)
+			})
+		}
+	</script>
+</body>
+</html>
