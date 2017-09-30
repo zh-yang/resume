@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>go-top</title>
+  <style type="text/css">
+		* {
+		  margin: 0;
+		  padding: 0;
+		}
+		html,body,.ct {
+			height: 100%;
+		}
+		.ct {
+			overflow: auto;
+		}
+		.page {
+			height: 600px;
+		  background: #cb1;
+		  margin-bottom: 20px;
+		}
+		.go-top {
+		  display: none;
+		  position: fixed;
+		  right: 30px;
+		  bottom: 50px;
+		  outline: none;
+		  border: none;
+		  border-radius: 7px;
+		  padding: 8px 15px;
+		  background: green;
+		  opacity: 0.3;
+		  cursor: pointer;
+		}
+		.go-top:hover {
+		  opacity: 1;
+		}
+  </style>
+</head>
+<body>
+	<div class="ct">
+		<div class="page">第一页</div>
+  	<div class="page">第二页</div>
+	</div>
+  <script type="text/javascript">
+		var GoTop = (function(){
+			function _GoTop(container){
+			  this.ct = container
+			  this.target = document.createElement('button')
+			  this.target.innerText = 'GoTop'
+			  this.target.classList.add('go-top')
+			  this.createNode()
+			  this.bindEvent()
+			}
+			_GoTop.prototype = {
+			  createNode: function(){
+			    this.ct.appendChild(this.target)
+			  },bindEvent: function(){
+			    var _this = this 
+			    _this.ct.onscroll = function(){
+			      if(_this.ct.scrollTop<200){
+			        _this.target.style.display = 'none'
+			      }else{
+			        _this.target.style.display = 'block'
+			      }
+			    }
+			    this.target.onclick = function(){
+			      _this.ct.scrollTop = 0
+			    }
+			  }
+			}
+			return {
+				init : function(container){
+					if(container.length&&container.length!==0){
+						for(var i=0; i<container.length; i++){
+							new _GoTop(container[i])
+						}
+					}else{
+						new _GoTop(container)
+					}
+				}
+			}
+		})()
+		var ct = document.getElementsByClassName('ct')[0] 
+		GoTop.init(ct)
+  </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <meta charset="utf-8">
+  <title>lazy-load</title>
+</head>
+<style type="text/css">
+  * {
+    margin: 0;
+    padding: 0;
+  }
+  .wrap{
+    width: 620px;
+    margin: 50px auto 0;
+  }
+  .ct {
+    list-style:none;
+    margin-left:-20px;
+    margin-bottom:-20px;
+  }
+  .ct::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+  .ct>li{
+    width: 300px;
+    float:left;
+    padding-left:20px;
+    padding-bottom:20px;
+  }
+  .ct img {
+    display: block;
+    width: 100%;
+    height: 240px;
+  }
+  h2,h3,p {
+    margin-bottom: 50px;
+  }
+</style>
+<body>
+  <div class="wrap">
+    <ul class="ct">
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+      <li><a href=""><img src="http://kejian.jirengu.com/data/fe/%E8%AF%BE%E4%BB%B6/32-%E6%87%92%E5%8A%A0%E8%BD%BD/code/blank.jpg" alt=""></a></li>
+    </ul>
+    <h3>我一曝光就增加内容</h3>
+    <p>我可以增加3次</p>
+    <h2>我只增加1次</h2>
+  </div>
+  <script type="text/javascript">
+    var dataSrc = [
+      'http://cdn.jirengu.com/book.jirengu.com/img/1.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/2.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/3.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/4.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/5.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/6.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/7.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/8.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/9.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/10.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/11.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/12.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/13.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/14.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/15.jpg',
+      'http://cdn.jirengu.com/book.jirengu.com/img/16.jpg' 
+    ]
+    var srcOld = $('.ct img').attr('src')
+    function random(){
+      return Math.floor(Math.random()*17)
+    }
+    function callBack1($node) {
+      if($node.find('img').attr('src') === srcOld){
+        $node.find('img').attr('src',dataSrc[random()])
+      }
+    }
+    function callBack2($node) {
+      $node.text($node.text()+' hello world')
+    }
+    
+    var Exposures = (function() {
+      function Exposure($target,callback,times) {
+        this.$target = $target
+        this.callback = callback
+        this.times = times ? times : 0
+        this.bind()
+        this.check()
+      }
+      Exposure.prototype.bind = function() {
+        var _this = this
+        _this.time = 0
+        _this.timer = null
+        $(window).on('scroll',function() {
+          if(_this.timer){
+            clearTimeout(_this.timer)
+          }
+          _this.timer = setTimeout(function(){
+            _this.check()
+          },300)
+        })
+      }
+      Exposure.prototype.check = function() {
+        var _this = this
+        if(_this.isVisible()){
+           if(_this.times<1){}else if(_this.times>=1){
+            _this.time++
+            if(_this.time>_this.times){return}
+          }else{}
+          _this.callback(_this.$target)
+        }
+      }
+      Exposure.prototype.isVisible = function() {
+        var windowHight = $(window).height(),
+            scrollTop = $(window).scrollTop(),
+            offsetTop = this.$target.offset().top,
+            nodeHeight = this.$target.height()
+        if(offsetTop<windowHight+scrollTop&&scrollTop<offsetTop+nodeHeight){
+          return true
+        }else{
+          
+          return false
+        }
+      }
+      return {
+        init : function($target,callback,times) {
+          $target.each(function(index,node){
+            new Exposure($(node),callback,times)
+          })
+        }
+      }
+    })()
+    
+    Exposures.init($('.ct>li'),callBack1)
+    Exposures.init($('h3'),callBack2)
+    Exposures.init($('p'),callBack2,3)
+    Exposures.init($('h2'),callBack2,1)
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab切换/滑动</title>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		.content {
+			display: inline-block;
+			margin: 50px 50px;
+		}
+		.tabs {
+			border: 1px solid #ccc;
+			border-bottom: none;
+		}
+		.tabs::after {
+			content: "";
+			display: block;
+			clear: both;
+		}
+		.tabs>li {
+			box-sizing: border-box;
+			width: 150px;
+			list-style: none;
+			display: block;
+			float: left;
+			border-left: 1px solid #ccc;
+			padding-left: 15px; 
+			line-height: 40px;
+			cursor: pointer;
+		}
+		.tabs>li:first-child {
+			border-left: none;
+		}
+		.tabs>li.active:nth-child(odd) {
+			font-weight: bold;
+			color: green;
+			background: rgba(200,20,20,0.2);
+		}
+		.tabs>li.active:nth-child(even) {
+			font-weight: bold;
+			color: green;
+			background: rgba(20,20,200,0.2);
+		}
+		.panel {
+			height: 150px;
+			padding-left: 15px;
+		}
+		.content .panel {
+			display: none;
+			border: 1px solid #ccc;
+			border-top: none;
+		}
+		.content .panel.active {
+			display: block;
+		}
+		.panel:nth-child(odd) {
+			background: rgba(200,20,20,0.2);
+		}
+		.panel:nth-child(even) {
+			background: rgba(20,20,200,0.2);
+		}
+	</style>
+</head>
+<body>
+	<div class="content">
+		<div class="tabs">
+			<li>tab1</li>
+			<li>tab2</li>
+			<li>tab3</li>
+		</div>
+		<div class="wrap">
+			<div class="panel">content1</div>
+			<div class="panel">content2</div>
+			<div class="panel">content3</div>
+		</div>
+	</div>
+	<div class="content">
+		<div class="tabs">
+			<li>tab1</li>
+			<li>tab2</li>
+			<li>tab3</li>
+			<li>tab4</li>
+			<li>tab5</li>
+		</div>
+		<div class="wrap">
+			<div class="panel">content1</div>
+			<div class="panel">content2</div>
+			<div class="panel">content3</div>
+			<div class="panel">content4</div>
+			<div class="panel">content5</div>
+		</div>
+	</div>
+		<div class="content">
+		<div class="tabs">
+			<li>tab1</li>
+			<li>tab2</li>
+			<li>tab3</li>
+			<li>tab4</li>
+			<li>tab5</li>
+			<li>tab6</li>
+			<li>tab7</li>
+			<li>tab8</li>
+		</div>
+		<div class="wrap">
+			<div class="panel">content1</div>
+			<div class="panel">content2</div>
+			<div class="panel">content3</div>
+			<div class="panel">content4</div>
+			<div class="panel">content5</div>
+			<div class="panel">content6</div>
+			<div class="panel">content7</div>
+			<div class="panel">content8</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var Tabs = (function(){
+		function Tab ($container) {
+			this.$ct = $container
+			this.init()
+		}
+		Tab.prototype.init = function () {
+			this.$tabs = this.$ct.find('.tabs>li')
+			this.$panels = this.$ct.find('.wrap>.panel')
+			this.$tabs.first().addClass('active')
+			this.$panels.first().addClass('active')
+			this.bind()
+		}
+		Tab.prototype.bind = function () {
+			var _this = this
+			_this.$tabs.on('click',function () {
+				$(this).addClass('active').siblings().removeClass('active')
+				_this.$panels.eq($(this).index()).addClass('active')
+																.siblings().removeClass('active')
+			})
+		}
+		return {
+			init : function ($container) {
+				$container.each(function(index,node){
+					new Tab($(node))
+				})
+			}
+		}
+	})()
+	Tabs.init($('.content'))
+</script>
+</html>

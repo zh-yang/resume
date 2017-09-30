@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <meta charset="utf-8">
+  <title>waterfall</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .wrap {
+      position: relative;
+    }
+    .wrap>.item {
+      width: 150px;
+      position: absolute;
+      margin-top: 10px;
+      border: 1px dashed #ccc;
+      /*transition: all 1s;*/
+    }
+    .wrap>.h1 {
+      height: 100px;
+      background: blue;
+    }
+    .wrap>.h2 {
+      height: 350px;
+      background: red;
+    }
+    .wrap>.h3 {
+      height: 280px;
+      background: green;
+    }
+    .wrap>.h4 {
+      height: 200px;
+      background: orange;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap1 wrap">
+    <div class="item h1">1</div>
+    <div class="item h2">2</div>
+    <div class="item h3">3</div>
+    <div class="item h4">4</div>
+    <div class="item h1">5</div>
+    <div class="item h2">6</div>
+    <div class="item h1">7</div>
+    <div class="item h3">8</div>
+    <div class="item h4">9</div>
+    <div class="item h2">10</div>
+    <div class="item h1">11</div>
+    <div class="item h2">12</div>
+    <div class="item h3">13</div>
+    <div class="item h4">14</div>
+    <div class="item h1">15</div>
+    <div class="item h2">16</div>
+    <div class="item h1">17</div>
+    <div class="item h3">18</div>
+    <div class="item h4">19</div>
+    <div class="item h2">20</div>
+  </div>
+  <div class="wrap2 wrap">
+    <div class="item h1">1</div>
+    <div class="item h2">2</div>
+    <div class="item h3">3</div>
+    <div class="item h4">4</div>
+    <div class="item h1">5</div>
+    <div class="item h2">6</div>
+    <div class="item h1">7</div>
+    <div class="item h3">8</div>
+    <div class="item h4">9</div>
+    <div class="item h2">10</div>
+    <div class="item h1">11</div>
+    <div class="item h2">12</div>
+    <div class="item h3">13</div>
+    <div class="item h4">14</div>
+    <div class="item h1">15</div>
+    <div class="item h2">16</div>
+    <div class="item h1">17</div>
+    <div class="item h3">18</div>
+    <div class="item h4">19</div>
+    <div class="item h2">20</div>
+  </div>
+  <script type="text/javascript">
+    function Waterfall ($nodes,$container) {
+      this.$nodes = $nodes
+      this.$ct = $container
+      this.init()
+    }
+    Waterfall.prototype.init = function () {
+      var _this = this
+      _this.topArr = []
+      _this.lowTop = 0
+      _this.lowIdx = 0
+      _this.idx = 0
+      _this.colNum = Math.floor(_this.$ct.width()/_this.$nodes.width())
+      for(var i=0; i<this.colNum; i++){
+        this.topArr.push(0)
+      }
+      while(_this.idx<_this.$nodes.length){
+        this.updateLow()
+        this.layout()
+      }
+    }
+    Waterfall.prototype.layout = function () { 
+      this.$nodes.eq(this.idx).css({
+        left : this.$nodes.width()*this.lowIdx,
+        top : this.lowTop
+      })
+      this.topArr[this.lowIdx] += this.$nodes.eq(this.idx).height()
+      this.$ct.css({height : this.updateHigh()})
+      this.idx++
+    }
+    Waterfall.prototype.updateLow = function () {
+      var _this = this 
+      _this.lowTop = _this.topArr[0]
+      _this.lowIdx = 0
+      for(var k=1; k<_this.topArr.length; k++){
+        if(_this.topArr[k]<_this.lowTop){
+          _this.lowTop = _this.topArr[k]
+          _this.lowIdx = k
+        }
+      }
+    }
+    Waterfall.prototype.updateHigh = function () {
+      var _this = this 
+      var high = _this.topArr[0]
+      for(var k=1; k<_this.topArr.length; k++){
+        if(_this.topArr[k]>high){
+          high = _this.topArr[k]
+        }
+      }
+      return high
+    }
+
+    new Waterfall($('.wrap1 .item'),$('.wrap1'))
+    new Waterfall($('.wrap2 .item'),$('.wrap2'))
+
+
+  </script>
+</body>
+</html>
