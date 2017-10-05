@@ -150,7 +150,7 @@ function playMusic(list) {
 				$time.text(minutes + ':' + seconds)
 			}
 			function getMusic(cid,callback){
-				$.get('http://api.jirengu.com/fm/getSong.php',{channel: cid})
+				$.get('https://jirenguapi.applinzi.com/fm/getSong.php',{channel: cid})
 				 .done(function(song){
 				 	//console.log(JSON.parse(song).song[0],callback)
 					callback(JSON.parse(song).song[0])
@@ -159,7 +159,7 @@ function playMusic(list) {
 
 
 			function fetchLrc(sid,success,error){
-        $.get('http://api.jirengu.com/fm/getLyric.php',{sid:sid})
+        $.get('https://jirenguapi.applinzi.com/fm/getLyric.php',{sid:sid})
 				.done(function(rel){
     			var lyric = parseLrc(JSON.parse(rel).lyric)
     			if(success)success(lyric)
