@@ -286,4 +286,13 @@ function playMusic(list) {
 				$('.play-panel.active').addClass('full-screen')
 			},8000)
 		})
+		$(window).click(function(){
+			if(timerFullScreen){
+				clearTimeout(timerFullScreen)
+			}
+			$('.play-panel.active').removeClass('full-screen')
+			timerFullScreen = setTimeout(function(){
+				$('.play-panel.active').addClass('full-screen')
+			},8000)
+		})
 
