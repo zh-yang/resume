@@ -1,0 +1,16 @@
+{
+  "name": "lebronii",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack ./src/app.js app.bundle.js",
+    "webpack": "webpack"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^3.6.0"
+  }
+}
